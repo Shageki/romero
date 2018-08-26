@@ -1,0 +1,20 @@
+<html>
+
+<head></head>
+
+<h1>Did this work?</h1> Fudgebuckets!
+<button id="devButton">detect modes</button>
+<button id="devButton2">tets</button>
+
+<script>
+  var detect_mods = require('./project_modules/detect_mods');
+
+  document.getElementById('devButton').addEventListener('click', function() {
+    detect_mods.alertBoy()
+  })
+  document.getElementById('devButton2').addEventListener('click', function() {
+    alert('wang')
+  })
+</script>
+
+</html>

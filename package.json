@@ -1,0 +1,23 @@
+{
+  "name": "romero",
+  "version": "0.0.1",
+  "description": "A 7 Days to Die configuration editor and manager.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shageki/romero.git"
+  },
+  "author": "Shageki",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Shageki/romero/issues"
+  },
+  "homepage": "https://github.com/Shageki/romero#readme",
+  "devDependencies": {
+    "electron": "^2.0.8"
+  }
+}
