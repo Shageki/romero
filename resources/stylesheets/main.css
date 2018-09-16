@@ -1,0 +1,310 @@
+/* define fonts */
+@font-face {
+  font-family: DeadFontWalking;
+  src: url('../fonts/DeadFontWalking.otf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: LetoTextSansDefect;
+  src: url('../fonts/LetoTextSansDefect.otf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: icon-works-webfont;
+  src: url('../fonts/icon-works-webfont.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+:focus {
+  outline: none;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  pointer-events: none;
+  user-select: none;
+}
+
+.touching {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+button {
+  pointer-events: auto;
+  cursor: pointer;
+  margin: 3px 5px;
+}
+
+input {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.flex_row {
+  display: flex;
+  flex-direction: row;
+}
+
+.full_page_container {
+  background: #333;
+  color: #ffffff;
+  font-family: LetoTextSansDefect;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  min-height: 100%;
+}
+
+.left_sidebar {
+  background: #424342;
+  width: 300px;
+  padding: 0px 1em;
+}
+
+.sidebar_title {
+  width: 100%;
+  padding: .5em 0px;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.main_panel {
+  background: #333;
+  flex-grow: 1;
+}
+
+.main_panel_title {
+  width: 100%;
+  padding: .5em 0px;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.flex_column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+button {
+  font-size: .75em;
+  padding: 3px 10px;
+  color: white;
+  background: #878E88;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #919892;
+}
+
+.button_skinny {
+  padding: 1px 10px;
+}
+
+.red_button {
+  background: #7E6661;
+}
+
+.red_button:hover {
+  background: #89736F;
+}
+
+.green_button {
+  background: #3EB335;
+}
+
+.green_button:hover {
+  background: #61C059;
+}
+
+.blue_button {
+  background: #607B75;
+}
+
+.blue_button:hover {
+  background: #6E8C86;
+}
+
+table {
+  border: 0px solid transparent;
+  border-collapse: collapse;
+  margin: 0px auto;
+}
+
+th {
+  text-align: center;
+  font-size: 1em;
+  padding: 5px 10px;
+  background: #535453;
+}
+
+td {
+  text-align: left;
+  padding: 5px 10px;
+  color: #333;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+tbody {
+  font-size: 1em;
+}
+
+.small_text {
+  font-size: .75em;
+}
+
+tr {
+  background: #B9BDB9;
+}
+
+tr:nth-of-type(even) {
+  background: #B2B7B3;
+}
+
+.hover_row:hover {
+  background: #96C0B7;
+}
+
+.large_table {
+  width: 100%;
+  padding: 5px;
+}
+
+.medium_table {
+  width: 80%;
+  padding: 5px;
+}
+
+.small_table {
+  width: 300px;
+  padding: 5px;
+}
+
+input[type='radio']:after {
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  background-color: #D8DBD8;
+  content: '';
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid white;
+  cursor: pointer;
+}
+
+input[type='radio']:checked:after {
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  background-color: #3EB335;
+  content: '';
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid white;
+  cursor: pointer;
+}
+
+.icon {
+  font-family: icon-works-webfont;
+  display: inline;
+}
+
+.icon_trash::after {
+  content: "o";
+}
+
+.icon_redo::after {
+  content: "1";
+}
+
+.icon_gear::after {
+  content: "j";
+}
+
+.icon_search_plus::after {
+  content: "k";
+}
+
+.icon_folder::after {
+  content: "E";
+}
+
+.icon_plus::after {
+  content: "➕";
+}
+
+.icon_minus::after {
+  content: "➖";
+}
+
+.unicode_symbol {
+  font-family: system;
+}
+
+.icon_alert {
+  color: #7E6661;
+}
+
+.icon_alert::after {
+  content: "ù";
+}
+
+.icon_check {
+  color: #3EB335;
+}
+
+.icon_check::after {
+  content: "Ù";
+}
+
+.center_text {
+  text-align: center;
+}
+
+.main_panel_full_page_alert {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
+}
+
+#game_selected {
+  display: none;
+  width: 100%;
+  height: 100%;
+}
+
+#game_not_selected {
+  height: 100%;
+  width: 100%;
+}

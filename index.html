@@ -1,20 +1,184 @@
+<!DOCTYPE html>
 <html>
 
-<head></head>
+<head>
+  <meta charset="UTF-8">
+  <title>Romero</title>
+  <link rel="stylesheet" type="text/css" href="resources/stylesheets/main.css">
+</head>
 
-<h1>Did this work?</h1> Fudgebuckets!
-<button id="devButton">detect modes</button>
-<button id="devButton2">tets</button>
+<body>
+  <div class="full_page_container">
+    <div class="flex_column left_sidebar">
+      <div class="sidebar_title">Installs</div>
+      <table class="large_table" id="installs_list">
+        <thead>
+          <tr>
+            <th colspan="2">Directory</th>
+          </tr>
+        </thead>
+        <tbody class="small_text"></tbody>
+      </table>
+      <br>
+      <div class="flex_row">
+        <button class="blue_button"><div class="icon icon_redo"></div> Rescan</button>
+        <button class="blue_button" id="find_directory"><div class="icon icon_search_plus"></div> Find Install</button>
+      </div>
+    </div>
+    <div class=" flex_column main_panel">
+      <div id="game_not_selected">
+        <div class="main_panel_full_page_alert">
+          Select an install location to get started.
+        </div>
+      </div>
+      <div id="game_selected">
+        <div>
+          <div class="main_panel_title">Mods</div>
+          <table class="medium_table" id="mods_list">
+            <thead>
+              <tr>
+                <th>Mod</th>
+                <th>Stacks</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody class="small_text">
+            </tbody>
+          </table>
+          <br>
+          <div class="main_panel_title">Backups</div>
+          <table class="medium_table" id="backup_table">
+            <thead>
+              <tr>
+                <th>File</th>
+                <th>Status</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+          <br>
+          <div class="flex_column">
+            <button class="red_button" id="purge_all_button"><div class="icon icon_trash"></div> Purge all files</button>
+          </div>
+          <br><br>
+        </div>
+        </div>
+      </div>
 
-<script>
-  var detect_mods = require('./project_modules/detect_mods');
+      <script>
+        // setup global variables
+        var gInstalls = []
+        var gSelectedGame = {
+          "directory": "",
+        }
 
-  document.getElementById('devButton').addEventListener('click', function() {
-    detect_mods.alertBoy()
-  })
-  document.getElementById('devButton2').addEventListener('click', function() {
-    alert('wang')
-  })
-</script>
+        const system_info = require('./project_modules/system_info');
+        var sysInfo = system_info.about_system()
+
+        // Game install location selection
+        var install_list_update = new Event('install_list_update');
+        window.addEventListener('install_list_update', function() {
+          let install_table = document.getElementById('installs_list').querySelector('tbody')
+          install_table.innerHTML = ``
+          if (gInstalls.length == 0) {
+            new_row.innerHTML = `<td colspan"2">No installs detected.\nPlease locate the /Data/Config folder in your 7 Days to Die installation.</td>`
+          } else {
+            for (var i = 0; i < gInstalls.length; i++) {
+              let new_row = document.createElement('tr')
+              new_row.classList.add(`touching`)
+              new_row.classList.add(`hover_row`)
+              new_row.innerHTML = `<td><input type="radio" name="install_selector"></input></td><td>${gInstalls[i]}</td>`
+              let internal_int = i
+              new_row.addEventListener('click', function() {
+                install_table.getElementsByTagName('input')[internal_int].click()
+              })
+              install_table.appendChild(new_row)
+            }
+            let install_lines = install_table.getElementsByTagName('input')
+            for (var i = 0; i < install_lines.length; i++) {
+              let internal_int = i
+              install_lines[i].addEventListener('change', function() {
+                gSelectedGame["directory"] = gInstalls[internal_int]
+                window.dispatchEvent(install_selected)
+              })
+            }
+          }
+        })
+        document.getElementById('find_directory').addEventListener('click', function() {
+          install_manager.search_manual()
+        })
+        const install_manager = require('./project_modules/install_manager')
+        install_manager.search_defaults()
+        var install_selected = new Event('install_selected');
+        window.addEventListener('install_selected', function() {
+          console.log(`Install selected: ${gSelectedGame["directory"]}`)
+          document.getElementById('game_not_selected').style.display = "none"
+          document.getElementById('game_selected').style.display = "block"
+          window.dispatchEvent(backup_status_update)
+          window.dispatchEvent(mod_list_update)
+        })
+
+        const backup_manager = require('./project_modules/backup_manager')
+        for (var i = 0; i < backup_manager.game_files.length; i++) {
+          let backup_table = document.getElementById('backup_table').getElementsByTagName('tbody')[0]
+          let backup_line = document.createElement('tr')
+          backup_line.innerHTML =
+            `<tr><td>${backup_manager.game_files[i]["file"]}</td><td class="center_text"><div class="backup_status"></div></td><td class="center_text"><button class="blue_button"><div class="icon icon_gear"></div> Backup</button></td></tr>`
+          backup_table.appendChild(backup_line)
+        }
+        let backup_buttons = document.getElementById('backup_table').getElementsByTagName('button')
+        for (var i = 0; i < backup_buttons.length; i++) {
+          let internal_int = i
+          backup_buttons[i].addEventListener('click', function() {
+            backup_manager.backup_file(internal_int)
+          })
+        }
+        var backup_status_update = new Event('backup_status_update');
+        window.addEventListener('backup_status_update', function() {
+          backup_manager.update_backups();
+          let file_list = document.getElementById('backup_table').getElementsByTagName('tbody')[0].getElementsByTagName('tr')
+          for (var i = 0; i < file_list.length; i++) {
+            let status
+            if (backup_manager.game_files[i]["backups"].length > 0) {
+              status = `<div class="icon icon_check"></div>`
+            } else {
+              status = `<div class="icon icon_alert"></div>`
+            }
+            file_list[i].getElementsByClassName('backup_status')[0].innerHTML = status
+          }
+        })
+
+        // Mod management
+        const mod_scripts = require('./project_modules/mod_scripts')
+        var mod_list_update = new Event('mod_list_update');
+        window.addEventListener('mod_list_update', function() {
+          mod_scripts.count_stacks();
+          mods_list = document.getElementById('mods_list').getElementsByTagName('tbody')[0]
+          mods_list.innerHTML = ''
+          for (var i = 0; i < mod_scripts.mods.length; i++) {
+            mod_row = document.createElement('tr')
+            row_content =
+              `<td>${mod_scripts.mods[i]["name"]}</td><td><div class="center_text">${mod_scripts.mods[i]["stacks"]}</div></td><td><div class="center_text"><button class="green_button button_skinny"><div class="unicode_symbol icon_plus"></div></button><button class="red_button button_skinny"><div class="unicode_symbol icon_minus"></div></button></div></td>`;
+            mod_row.innerHTML = row_content
+            mods_list.appendChild(mod_row)
+            let internal_int = i;
+            mods_list.getElementsByTagName('tr')[i].getElementsByTagName('button')[0].addEventListener('click', function() {
+              let apply = mod_scripts.mods[internal_int]["apply"]
+              apply()
+            })
+            mods_list.getElementsByTagName('tr')[i].getElementsByTagName('button')[1].addEventListener('click', function() {
+              let apply = mod_scripts.mods[internal_int]["remove"]
+              apply()
+            })
+          }
+        });
+
+        document.getElementById('purge_all_button').addEventListener('click', function() {
+          backup_manager.purge_all()
+        })
+      </script>
+</body>
 
 </html>
