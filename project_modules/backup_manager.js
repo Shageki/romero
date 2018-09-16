@@ -60,14 +60,15 @@
       let result = window.confirm(alert);
       if (result == true) {
         let double_check = window.confirm(`You will need to verify the game in Steam to replace these files.\n\nAre you SURE that you wish to continue?`);
-      }
-      if (double_check != true) {
-        return false;
+        if (double_check != true) {
+          return false;
+        }
       }
       for (var i = 0; i < files_to_purge.length; i++) {
         if (fs.existsSync(`${gSelectedGame["directory"]}${files_to_purge[i]}`)) {
           fs.unlinkSync(`${gSelectedGame["directory"]}${files_to_purge[i]}`)
         }
       }
+      alert(`Files purged.\n\nPlease quit Romero, verify your 7 Days to Die game files in Steam, and relaunch to continue.`)
     }
   }
