@@ -21,7 +21,6 @@
       </table>
       <br>
       <div class="flex_row">
-        <button class="blue_button"><div class="icon icon_redo"></div> Rescan</button>
         <button class="blue_button" id="find_directory"><div class="icon icon_search_plus"></div> Find Install</button>
       </div>
     </div>
@@ -62,10 +61,10 @@
           <div class="flex_column">
             <button class="red_button" id="purge_all_button"><div class="icon icon_trash"></div> Purge all files</button>
           </div>
-          <br><br>
-        </div>
         </div>
       </div>
+    </div>
+    <div class="notld_link touching" id="notld_link"><img src="resources/images/notld.png"></div>
 
       <script>
         // setup global variables
@@ -177,6 +176,11 @@
 
         document.getElementById('purge_all_button').addEventListener('click', function() {
           backup_manager.purge_all()
+        })
+
+        const shell = require('electron')
+        document.getElementById('notld_link').addEventListener('click', function() {
+          shell.openExternal('https://archive.org/details/Night.Of.The.Living.Dead_1080p')
         })
       </script>
 </body>
