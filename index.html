@@ -64,7 +64,7 @@
         </div>
       </div>
     </div>
-    <div class="notld_link touching" id="notld_link"><img src="resources/images/notld.png"></div>
+    <div class="touching" id="notld_link"><img src="resources/images/notld.png"></div>
 
       <script>
         // setup global variables
@@ -184,8 +184,8 @@
           backup_manager.purge_all()
         })
 
-        const shell = require('electron')
         document.getElementById('notld_link').addEventListener('click', function() {
+          let shell = require('electron').shell
           shell.openExternal('https://archive.org/details/Night.Of.The.Living.Dead_1080p')
         })
       </script>

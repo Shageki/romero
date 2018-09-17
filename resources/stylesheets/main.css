@@ -337,17 +337,17 @@ input[type='radio']:checked:after {
   width: 100%;
 }
 
-.notld_link {
+#notld_link {
   position: fixed;
   bottom: -4px;
   right: 0px;
   opacity: .3;
 }
 
-.notld_link:hover {
+#notld_link:hover {
   opacity: 1;
 }
 
-.notld_link img {
+#notld_link img {
   width: 75px;
 }
