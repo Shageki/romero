@@ -12,6 +12,11 @@ Run the following in Terminal
 electron-packager . --overwrite --platform=darwin --arch=x64 --icon=resources/icons/Romero.icns --prune=true --out=release-builds
 ```
 
+### win32
+```
+electron-packager . --overwrite --platform=win32 --arch=x64 --icon=resources/icons/Romero.png --prune=true --out=release-builds
+```
+
 ## Coding Conventions
 
 ### Modules and Extensions
