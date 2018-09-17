@@ -5,7 +5,7 @@
       "stacks": `N/A`,
       apply: function() {
         const fs = require('fs');
-        let xmlDoc = mod_scripts.read_xml(`${gSelectedGame["directory"]}/items.xml`)
+        let xmlDoc = mod_scripts.read_xml(`${gSelectedGame["directory"]}items.xml`)
         let property_items = xmlDoc.querySelectorAll(`property[name='DamageBonus.head']`)
         for (var i = 0; i < property_items.length; i++) {
           let damage_mod = parseInt(property_items[i].getAttribute('value'))
@@ -14,7 +14,7 @@
         }
         var s = new XMLSerializer();
         var str = s.serializeToString(xmlDoc);
-        fs.writeFileSync(`${gSelectedGame["directory"]}/items.xml`, str)
+        fs.writeFileSync(`${gSelectedGame["directory"]}items.xml`, str)
         mod_scripts.add_stack('Headshot Damage +')
       },
       remove: function() {
@@ -23,7 +23,7 @@
           return false;
         }
         const fs = require('fs');
-        let xmlDoc = mod_scripts.read_xml(`${gSelectedGame["directory"]}/items.xml`)
+        let xmlDoc = mod_scripts.read_xml(`${gSelectedGame["directory"]}items.xml`)
         let property_items = xmlDoc.querySelectorAll(`property[name='DamageBonus.head']`)
         for (var i = 0; i < property_items.length; i++) {
           let damage_mod = parseInt(property_items[i].getAttribute('value'))
@@ -32,7 +32,7 @@
         }
         var s = new XMLSerializer();
         var str = s.serializeToString(xmlDoc);
-        fs.writeFileSync(`${gSelectedGame["directory"]}/items.xml`, str)
+        fs.writeFileSync(`${gSelectedGame["directory"]}items.xml`, str)
         mod_scripts.remove_stack('Headshot Damage +')
       },
     }, {
@@ -41,7 +41,7 @@
       "stacks": `N/A`,
       apply: function() {
         const fs = require('fs');
-        let xmlDoc = mod_scripts.read_xml(`${gSelectedGame["directory"]}/items.xml`)
+        let xmlDoc = mod_scripts.read_xml(`${gSelectedGame["directory"]}items.xml`)
         let property_items = xmlDoc.querySelectorAll(`property[name='Stacknumber']`)
         for (var i = 0; i < property_items.length; i++) {
           let damage_mod = parseInt(property_items[i].getAttribute('value'))
@@ -50,7 +50,7 @@
         }
         var s = new XMLSerializer();
         var str = s.serializeToString(xmlDoc);
-        fs.writeFileSync(`${gSelectedGame["directory"]}/items.xml`, str)
+        fs.writeFileSync(`${gSelectedGame["directory"]}items.xml`, str)
         mod_scripts.add_stack('Stack Limit Doubler')
       },
       remove: function() {
@@ -59,7 +59,7 @@
           return false;
         }
         const fs = require('fs');
-        let xmlDoc = mod_scripts.read_xml(`${gSelectedGame["directory"]}/items.xml`)
+        let xmlDoc = mod_scripts.read_xml(`${gSelectedGame["directory"]}items.xml`)
         let property_items = xmlDoc.querySelectorAll(`property[name='Stacknumber']`)
         for (var i = 0; i < property_items.length; i++) {
           let damage_mod = parseInt(property_items[i].getAttribute('value'))
@@ -68,7 +68,7 @@
         }
         var s = new XMLSerializer();
         var str = s.serializeToString(xmlDoc);
-        fs.writeFileSync(`${gSelectedGame["directory"]}/items.xml`, str)
+        fs.writeFileSync(`${gSelectedGame["directory"]}items.xml`, str)
         mod_scripts.remove_stack('Stack Limit Doubler')
       },
     }, {
@@ -77,7 +77,7 @@
       "stacks": `N/A`,
       apply: function() {
         const fs = require('fs');
-        let xmlDoc = mod_scripts.read_xml(`${gSelectedGame["directory"]}/items.xml`)
+        let xmlDoc = mod_scripts.read_xml(`${gSelectedGame["directory"]}items.xml`)
         let property_items = xmlDoc.querySelectorAll(`property[name='DegradationRate']`)
         for (var i = 0; i < property_items.length; i++) {
           let damage_mod = property_items[i].getAttribute('value').split(',')
@@ -88,7 +88,7 @@
         }
         var s = new XMLSerializer();
         var str = s.serializeToString(xmlDoc);
-        fs.writeFileSync(`${gSelectedGame["directory"]}/items.xml`, str)
+        fs.writeFileSync(`${gSelectedGame["directory"]}items.xml`, str)
         mod_scripts.add_stack('Durable Items')
       },
       remove: function() {
@@ -97,7 +97,7 @@
           return false;
         }
         const fs = require('fs');
-        let xmlDoc = mod_scripts.read_xml(`${gSelectedGame["directory"]}/items.xml`)
+        let xmlDoc = mod_scripts.read_xml(`${gSelectedGame["directory"]}items.xml`)
         let property_items = xmlDoc.querySelectorAll(`property[name='DegradationRate']`)
         for (var i = 0; i < property_items.length; i++) {
           let damage_mod = property_items[i].getAttribute('value').split(',')
@@ -108,7 +108,7 @@
         }
         var s = new XMLSerializer();
         var str = s.serializeToString(xmlDoc);
-        fs.writeFileSync(`${gSelectedGame["directory"]}/items.xml`, str)
+        fs.writeFileSync(`${gSelectedGame["directory"]}items.xml`, str)
         mod_scripts.add_stack('Durable Items')
       }
     }, {
@@ -117,7 +117,7 @@
       "stacks": `N/A`,
       apply: function() {
         const fs = require('fs');
-        let xmlDoc = mod_scripts.read_xml(`${gSelectedGame["directory"]}/items.xml`)
+        let xmlDoc = mod_scripts.read_xml(`${gSelectedGame["directory"]}items.xml`)
         let property_items = xmlDoc.querySelectorAll(`item[name*='Zombie']`)
         for (var i = 0; i < property_items.length; i++) {
           let block_line = property_items[i].querySelectorAll('property[name="DamageBlock"]')[0]
@@ -129,7 +129,7 @@
         }
         var s = new XMLSerializer();
         var str = s.serializeToString(xmlDoc);
-        fs.writeFileSync(`${gSelectedGame["directory"]}/items.xml`, str)
+        fs.writeFileSync(`${gSelectedGame["directory"]}items.xml`, str)
         mod_scripts.add_stack('Weaker Zombie Block Damage')
       },
       remove: function() {
@@ -138,7 +138,7 @@
           return false;
         }
         const fs = require('fs');
-        let xmlDoc = mod_scripts.read_xml(`${gSelectedGame["directory"]}/items.xml`)
+        let xmlDoc = mod_scripts.read_xml(`${gSelectedGame["directory"]}items.xml`)
         let property_items = xmlDoc.querySelectorAll(`item[name*='Zombie']`)
         for (var i = 0; i < property_items.length; i++) {
           let block_line = property_items[i].querySelectorAll('property[name="DamageBlock"]')[0]
@@ -150,7 +150,7 @@
         }
         var s = new XMLSerializer();
         var str = s.serializeToString(xmlDoc);
-        fs.writeFileSync(`${gSelectedGame["directory"]}/items.xml`, str)
+        fs.writeFileSync(`${gSelectedGame["directory"]}items.xml`, str)
         mod_scripts.add_stack('Weaker Zombie Block Damage')
       }
     }],
@@ -225,7 +225,7 @@
         return xmlDoc
       } catch (e) {
         console.log(`read_xml: ${e}`)
-        alert(`Unable to parse ${file_location}\nPlease check your game directory and verify files in Steam.`)
+        alert(`Unable to parse file:\n\n${file_location}\n\nPlease check your game directory and/or verify files in Steam.`)
       }
     },
   }

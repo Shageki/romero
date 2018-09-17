@@ -140,10 +140,16 @@
           let file_list = document.getElementById('backup_table').getElementsByTagName('tbody')[0].getElementsByTagName('tr')
           for (var i = 0; i < file_list.length; i++) {
             let status
-            if (backup_manager.game_files[i]["backups"].length > 0) {
-              status = `<div class="icon icon_check"></div>`
-            } else {
+            // check if source file exists, show alert icon_x
+            let source_check = backup_manager.source_exists(`${gSelectedGame["directory"]}${backup_manager.game_files[i]["file"]}`)
+            if (source_check == false) {
               status = `<div class="icon icon_alert"></div>`
+            } else {
+              if (backup_manager.game_files[i]["backups"].length > 0) {
+                status = `<div class="icon icon_check"></div>`
+              } else {
+                status = `<div class="icon icon_x"></div>`
+              }
             }
             file_list[i].getElementsByClassName('backup_status')[0].innerHTML = status
           }

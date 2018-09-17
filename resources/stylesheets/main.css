@@ -20,6 +20,13 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: modernpics;
+  src: url('../fonts/modernpics.otf');
+  font-weight: normal;
+  font-style: normal;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -122,11 +129,11 @@ button:hover {
 }
 
 .red_button {
-  background: #7E6661;
+  background: #894F44;
 }
 
 .red_button:hover {
-  background: #89736F;
+  background: #935F55;
 }
 
 .green_button {
@@ -256,32 +263,53 @@ input[type='radio']:checked:after {
   content: "E";
 }
 
+.icon_plus {
+  font-family: LetoTextSansDefect;
+}
+
 .icon_plus::after {
-  content: "➕";
+  content: "+";
+}
+
+.icon_minus {
+  font-family: LetoTextSansDefect;
 }
 
 .icon_minus::after {
-  content: "➖";
+  content: "-";
 }
 
 .unicode_symbol {
-  font-family: system;
+  font-family: monospace;
+  display: inline-block;
+  font-size: 2em;
 }
 
 .icon_alert {
-  color: #7E6661;
+  font-family: modernpics;
+  color: #894F44;
 }
 
 .icon_alert::after {
-  content: "ù";
+  content: "!";
 }
 
 .icon_check {
-  color: #3EB335;
+  font-family: modernpics;
+  color: #61C059;
 }
 
 .icon_check::after {
-  content: "Ù";
+  content: "%";
+}
+
+.icon_x {
+  font-family: modernpics;
+  color: #894F44;
+}
+
+.icon_x::after {
+  content: "X";
 }
 
 .center_text {

@@ -15,6 +15,10 @@
     backup_file: function(file_index) {
       var fs = require('fs');
       let original_file = backup_manager.game_files[file_index]["file"];
+      if (backup_manager.source_exists(`${gSelectedGame["directory"]}${original_file}`) == false) {
+        alert(`Source file does not exist.\n\n${gSelectedGame["directory"]}${original_file}\n\nPlease verify your game files in Steam.`)
+        return false;
+      }
       let file_name = original_file.split(`.`)[0]
       let file_extension = original_file.split(`.`)[1]
       let time_stamp = new Date();
@@ -45,6 +49,11 @@
         }
       }
     },
+    source_exists: function(file) {
+      const fs = require('fs')
+      let check = fs.existsSync(file)
+      return check
+    },
     list_backups: function(file_index) {},
     purge_all: function() {
       const fs = require('fs');
@@ -53,12 +62,14 @@
         files_to_purge.push(backup_manager.game_files[i]["file"])
       }
       files_to_purge.push(`romero.xml`)
-      let alert = `Warning!\nThis will erase the following files:`
+      let alert_text = `Warning: This will erase the following files:\n`
       for (var i = 0; i < files_to_purge.length; i++) {
-        alert += `\n${files_to_purge[i]}`
+        alert_text += `\n${files_to_purge[i]}`
       }
-      let result = window.confirm(alert);
-      if (result == true) {
+      let result = window.confirm(alert_text);
+      if (result == false) {
+        return false;
+      } else {
         let double_check = window.confirm(`You will need to verify the game in Steam to replace these files.\n\nAre you SURE that you wish to continue?`);
         if (double_check != true) {
           return false;
@@ -68,7 +79,7 @@
         if (fs.existsSync(`${gSelectedGame["directory"]}${files_to_purge[i]}`)) {
           fs.unlinkSync(`${gSelectedGame["directory"]}${files_to_purge[i]}`)
         }
-      }
+      };
       alert(`Files purged.\n\nPlease quit Romero, verify your 7 Days to Die game files in Steam, and relaunch to continue.`)
     }
   }
