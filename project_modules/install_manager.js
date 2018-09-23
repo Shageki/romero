@@ -7,8 +7,8 @@ module.exports = {
     let platform = os.platform();
     var defaultLocations = {
       "win32": [`C:/Program Files/Steam/steamapps/common/7 Days To Die/Data/Config/`, `D:/Program Files/Steam/steamapps/common/7 Days To Die/Data/Config/`, `E:/Program Files/Steam/steamapps/common/7 Days To Die/Data/Config/`],
-      "darwin": [`${homeDir}/Library/Application Support/Steam/SteamApps/common/7 Days To Die/7DaysToDie.app/Data/Config/`, `/Library/Application Support/Steam/SteamApps/common/7 Days To Die/7DaysToDie.app/Data/Config/`],
-      "linux": [`${homeDir}/.local/share/Steam/SteamApps/common/7 Days To Die/Data/Config/`]
+      "darwin": [`${homeDir}/Library/Application Support/Steam/steamapps/common/7 Days To Die/7DaysToDie.app/Data/Config/`, `/Library/Application Support/Steam/steamapps/common/7 Days To Die/7DaysToDie.app/Data/Config/`],
+      "linux": [`${homeDir}/.local/share/Steam/steamapps/common/7 Days To Die/Data/Config/`]
     }
     if (defaultLocations[platform] == undefined) {
       console.warn(`search_defaults: Unrecognized platform "${platform}" - please select install directory manually.`);
@@ -27,7 +27,6 @@ module.exports = {
   },
   search_config: function() {},
   search_manual: function() {
-    // TODO: Invalidate duplicate entries
     const {
       dialog
     } = require('electron').remote
@@ -36,8 +35,12 @@ module.exports = {
     })
     let validation = install_manager.validate_location(`${directory}/`)
     if (validation[0] == true) {
-      gInstalls.push(validation[1])
-      window.dispatchEvent(install_list_update)
+      if (gInstalls.includes(validation[1]) == true) {
+        alert(`${validation[1]} has already been detected.\n\nYou can select it from the Installs list.`)
+      } else {
+        gInstalls.push(validation[1])
+        window.dispatchEvent(install_list_update)
+      }
     } else {
       alert(`${directory} does not appear to be a valid install location.\n\nPlease select the 7 Days to Die game folder in a Steam library.`)
     }
