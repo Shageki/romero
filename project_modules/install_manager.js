@@ -38,17 +38,34 @@ module.exports = {
     if (validation[0] == true) {
       gInstalls.push(validation[1])
       window.dispatchEvent(install_list_update)
+    } else {
+      alert(`${directory} does not appear to be a valid install location.\n\nPlease select the 7 Days to Die game folder in a Steam library.`)
     }
   },
   validate_location: function(directory) {
     const fs = require('fs');
-    // TODO: Search several levels up & down for the correct folder to make selection a bit more lenient > return the adjusted 'correct' directory
-    try {
-      let success = fs.statSync(`${directory}/XUi_Menu/`);
-      return [true, directory]
-    } catch (e) {
-      return [false]
+
+    function statWrapper(full_directory) {
+      try {
+        fs.statSync(`${full_directory}`);
+        return true
+      } catch (e) {
+        return false
+      }
     }
+    if (statWrapper(`${directory}/XUi_Menu`) == true) {
+      return [true, directory]
+    }
+    if (statWrapper(`${directory}/Config/XUi_Menu`) == true) {
+      return [true, `${directory}Config/`]
+    }
+    if (statWrapper(`${directory}/Data/Config/XUi_Menu`) == true) {
+      return [true, `${directory}Data/Config/`]
+    }
+    if (statWrapper(`${directory}/7DaysToDie.app/Data/Config/XUi_Menu`) == true) {
+      return [true, `${directory}7DaysToDie.app/Data/Config/`]
+    }
+    return false
   },
   add_to_config: function() {},
 }
